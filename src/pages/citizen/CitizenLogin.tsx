@@ -79,15 +79,6 @@ const handleSubmit = async (e: React.FormEvent) => {
             <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>Access your e-Governance services</p>
           </div>
 
-          {/* Demo credentials */}
-          <div style={{
-            background: '#f0f9ff', border: '1px solid #bae6fd',
-            borderRadius: 12, padding: '12px 16px', marginBottom: 24
-          }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#0369a1', marginBottom: 4 }}>💡 Demo Credentials</div>
-            <div style={{ fontSize: 12, color: '#0c4a6e' }}>Email: <strong>citizen@egov.in</strong> | Password: <strong>citizen123</strong></div>
-          </div>
-
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: 20 }}>
               <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#374151', marginBottom: 8 }}>Email Address</label>
