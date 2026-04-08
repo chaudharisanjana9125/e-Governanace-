@@ -65,7 +65,17 @@ useEffect(() => {
     });
   }
 }, [user]);
-  const [passForm, setPassForm] = useState({ current: '', newPass: '', confirm: '' });
+  type PassFormType = {
+  current: string;
+  newPass: string;
+  confirm: string;
+};
+
+const [passForm, setPassForm] = useState<PassFormType>({
+  current: '',
+  newPass: '',
+  confirm: '',
+});
   const [showPassSection, setShowPassSection] = useState(false);
   const [notif, setNotif] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
   const [loading, setLoading] = useState(false);
@@ -394,16 +404,19 @@ const InfoRow = ({ icon, label, value, field, type = 'text', editing, form, setF
               {showPassSection && (
                 <>
                   {['current', 'newPass', 'confirm'].map((f, i) => (
-                    <div key={f} style={{ marginBottom: 12 }}>
-                      <label style={{ fontSize: 12, fontWeight: 600, color: '#374151', display: 'block', marginBottom: 6 }}>
-                        {['Current Password', 'New Password', 'Confirm New Password'][i]}
-                      </label>
-                      <input type="password" className="input-field" style={{ padding: '10px 14px', fontSize: 13 }}
-                        placeholder={['Enter current password', 'Enter new password', 'Confirm new password'][i]}
-                        value={(passForm as any)[f]}
-                        onChange={e => setPassForm({ ...passForm, [f]: e.target.value })} />
-                    </div>
-                  ))}
+  <div key={f}>
+    <input
+      type="password"
+      value={passForm[f as keyof PassFormType]}
+      onChange={e =>
+        setPassForm(prev => ({
+          ...prev,
+          [f]: e.target.value
+        }))
+      }
+    />
+  </div>
+))}
                   <button onClick={handlePassChange} className="btn-warning" style={{ width: '100%', justifyContent: 'center', marginTop: 4 }}>
                     Update Password
                   </button>
