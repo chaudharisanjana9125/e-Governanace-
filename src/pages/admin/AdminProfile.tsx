@@ -113,7 +113,7 @@ const handleSave = async () => {
     setNotif({ msg: 'Password changed!', type: 'success' });
   }
 };
-if (!user) return null;
+if (!user) return <div>Loading...</div>;
   return (
     <div style={{ display: 'flex', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       <AdminSidebar />
@@ -224,7 +224,12 @@ if (!user) return null;
                 { label: 'Role', value: 'Administrator', color: '#f59e0b' },
                 { label: 'Department', value: user?.department || 'Not set' },
                 { label: 'Status', value: 'Active', color: '#10b981' },
-                { label: 'Member Since', value: new Date(user?.createdAt || '').toLocaleDateString('en-IN', { month: 'long', year: 'numeric' }) },
+                { label: 'Member Since', value: user?.created_at
+  ? new Date(user.created_at).toLocaleDateString('en-IN', {
+      month: 'long',
+      year: 'numeric'
+    })
+  : 'N/A' },
               ].map(item => (
                 <div key={item.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid #f1f5f9' }}>
                   <span style={{ fontSize: 13, color: '#64748b' }}>{item.label}</span>
