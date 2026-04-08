@@ -40,7 +40,7 @@ useEffect(() => {
 });
 
 useEffect(() => {
-  if (user) {
+  if (user && !editing) {
     setForm({
       name: user.name || '',
       phone: user.phone || '',
@@ -49,7 +49,7 @@ useEffect(() => {
       gender: user.gender || '',
     });
   }
-}, [user]);
+}, [user, editing]);
   const [passForm, setPassForm] = useState({ current: '', newPass: '', confirm: '' });
   const [showPassSection, setShowPassSection] = useState(false);
   const [notif, setNotif] = useState<{ msg: string; type: 'success' | 'error' } | null>(null);
@@ -61,7 +61,7 @@ const handleSave = async () => {
     console.log("FORM DATA:", form);
 
     const { data, error } = await supabase
-      .from('users') // or admins table
+      .from('profiles') // ✔ correct
       .update({
         name: form.name,
         phone: form.phone,
