@@ -158,7 +158,7 @@ type InfoRowProps = {
   setForm: React.Dispatch<React.SetStateAction<FormType>>;
 };
 
-const InfoRow = React.memo(({ icon, label, value, field, type = 'text', editing, form, setForm }: InfoRowProps) => {
+const InfoRow = ({ icon, label, value, field, type = 'text', editing, form, setForm }: InfoRowProps) => {
 
   const handleChange = (e: any) => {
     if (!field) return;
@@ -177,10 +177,10 @@ const InfoRow = React.memo(({ icon, label, value, field, type = 'text', editing,
       <div style={{ flex: 1 }}>
         <div style={{ fontSize: 12 }}>{label}</div>
 
-        {editing && field ? (
+        {editing === true && field ? (   // ✅ FIX (explicit check)
           type === 'select' ? (
             <select 
-              value={form[field] || ''}   // ✅ FIX
+              value={form[field] || ''}
               onChange={handleChange}
             >
               <option value="">Select</option>
@@ -190,13 +190,13 @@ const InfoRow = React.memo(({ icon, label, value, field, type = 'text', editing,
             </select>
           ) : type === 'textarea' ? (
             <textarea 
-              value={form[field] || ''}   // ✅ FIX
+              value={form[field] || ''} 
               onChange={handleChange} 
             />
           ) : (
             <input 
               type={type} 
-              value={form[field] || ''}   // ✅ FIX
+              value={form[field] || ''} 
               onChange={handleChange} 
             />
           )
@@ -206,7 +206,7 @@ const InfoRow = React.memo(({ icon, label, value, field, type = 'text', editing,
       </div>
     </div>
   );
-});
+};
   return (
     <div style={{ display: 'flex', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       <CitizenSidebar user={user} />
