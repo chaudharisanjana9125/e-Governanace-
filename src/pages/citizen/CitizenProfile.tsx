@@ -292,7 +292,7 @@ const InfoRow = ({ icon, label, value, field, type = 'text', editing, form, setF
             </div>
 
             {/* Info */}
-            <div style={{ padding: '0 32px 32px', marginTop: 20 }}>
+            <div style={{ padding: '0 32px 32px', marginTop: 60 }}>
               <div style={{ background: 'white', borderRadius: 16, padding: '0 8px', boxShadow: '0 4px 24px rgba(0,0,0,0.08)', border: '1px solid #f1f5f9' }}>
                <InfoRow 
   icon={<User size={18} style={{ color: '#1a56db' }} />}
