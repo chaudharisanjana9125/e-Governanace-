@@ -15,15 +15,25 @@ export default function AdminProfile() {
 
 useEffect(() => {
   const fetchUser = async () => {
-    const { data: { user: authUser } } = await supabase.auth.getUser();
+    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
 
-    if (authUser) {
-      const { data } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', authUser.id)
-        .single();
+    if (authError || !authUser) {
+      console.error("Auth Error:", authError);
+      return;
+    }
 
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('*')
+      .eq('id', authUser.id)
+      .single();
+
+    if (error) {
+      console.error("Profile Fetch Error:", error);
+      return;
+    }
+
+    if (data) {
       setUser(data);
     }
   };
@@ -113,7 +123,7 @@ const handleSave = async () => {
     setNotif({ msg: 'Password changed!', type: 'success' });
   }
 };
-if (!user) return <div>Loading...</div>;
+if (!user) return <div>Loading profile...</div>;
   return (
     <div style={{ display: 'flex', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       <AdminSidebar />
