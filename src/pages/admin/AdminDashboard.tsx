@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AdminSidebar from '../../components/AdminSidebar';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabaseClient';
 import type { Application } from '../../lib/store';
 import {
   FileText, Users, CheckCircle, XCircle, Clock, AlertCircle,

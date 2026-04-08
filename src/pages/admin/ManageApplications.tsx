@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import AdminSidebar from '../../components/AdminSidebar';
 import { getCurrentUser } from '../../lib/auth';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabaseClient';
 import type { Application } from '../../lib/store';
 import Notification from '../../components/Notification';
 import {
