@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AdminSidebar from '../../components/AdminSidebar';
-import { supabase } from '../../lib/supabase';
+import { supabase } from '../../lib/supabaseClient';
 import Notification from '../../components/Notification';
 import { User, Mail, Phone, MapPin, Building2, Edit3, Save, X, Shield, Lock } from 'lucide-react';
 
@@ -15,18 +15,30 @@ export default function AdminProfile() {
 
 useEffect(() => {
   const fetchUser = async () => {
-    const { data: { user: authUser }, error: authError } = await supabase.auth.getUser();
 
-    if (authError || !authUser) {
+    // ✅ STEP 1: session lo
+    const { data: { session }, error: authError } = await supabase.auth.getSession();
+
+    if (authError) {
       console.error("Auth Error:", authError);
       return;
     }
 
+    // ✅ STEP 2: user nikalo
+    const authUser = session?.user;
+
+    // ✅ STEP 3: YAHI ADD KARNA HAI
+    if (!authUser) {
+      console.log("No session found");
+      return;
+    }
+
+    // ✅ STEP 4: profile fetch karo
     const { data, error } = await supabase
       .from('profiles')
       .select('*')
       .eq('id', authUser.id)
-      .single();
+      .maybeSingle();
 
     if (error) {
       console.error("Profile Fetch Error:", error);
