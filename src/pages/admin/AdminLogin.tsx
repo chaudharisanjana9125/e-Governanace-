@@ -75,14 +75,6 @@ export default function AdminLogin() {
             <p style={{ color: '#64748b', fontSize: 14, margin: 0 }}>Restricted access — authorized personnel only</p>
           </div>
 
-          <div style={{
-            background: 'rgba(245,158,11,0.1)', border: '1px solid rgba(245,158,11,0.2)',
-            borderRadius: 12, padding: '12px 16px', marginBottom: 24
-          }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: '#fbbf24', marginBottom: 4 }}>💡 Demo Admin Credentials</div>
-            <div style={{ fontSize: 12, color: '#fde68a' }}>Email: <strong>admin@egov.in</strong> | Password: <strong>admin123</strong></div>
-          </div>
-
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: 20 }}>
               <label style={{ display: 'block', fontSize: 13, fontWeight: 600, color: '#cbd5e1', marginBottom: 8 }}>Admin Email</label>
