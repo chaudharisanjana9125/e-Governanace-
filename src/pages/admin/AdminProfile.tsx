@@ -19,13 +19,14 @@ useEffect(() => {
     // ✅ STEP 1: session lo
     const { data: { session }, error: authError } = await supabase.auth.getSession();
 
-    if (authError) {
-      console.error("Auth Error:", authError);
-      return;
-    }
-
     // ✅ STEP 2: user nikalo
     const authUser = session?.user;
+
+    if (!authUser) {
+  console.log("No session found");
+  setUser(null);
+  return;
+}
 
     // ✅ STEP 3: YAHI ADD KARNA HAI
     if (!authUser) {
@@ -46,8 +47,11 @@ useEffect(() => {
     }
 
     if (data) {
-      setUser(data);
-    }
+  setUser(data);
+} else {
+  console.log("No profile found in DB");
+  setUser(null);
+}
   };
 
   fetchUser();
@@ -135,7 +139,7 @@ const handleSave = async () => {
     setNotif({ msg: 'Password changed!', type: 'success' });
   }
 };
-if (!user) return <div>Loading profile...</div>;
+if (user === null) return <div>Not logged in</div>;
   return (
     <div style={{ display: 'flex', fontFamily: 'Plus Jakarta Sans, sans-serif' }}>
       <AdminSidebar />
